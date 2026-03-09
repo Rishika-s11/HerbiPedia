@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore 3D Plants - Herbipedia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <script src="js/bookmark.js"></script>
+    <link rel = "stylesheet" href="style.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; height: 100vh; 
+                   cursor: url("http://www.rw-designer.com/cursor-extern.php?id=51983") 16 16, auto;}
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f9faf8 0%, #e0f2ee 100%);
+            color: #25362b;
+            margin-bottom: 100px;
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        body.loaded { opacity: 1; }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: linear-gradient(to right, #fff, #e0f7e9);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            animation: slideDown 0.3s;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .logo i {
+            color: #4CAF50;
+            font-size: 1.3rem;
+            transition: transform 0.2s;
+        }
+        .logo:hover i {
+            transform: rotate(-18deg) scale(1.18);
+            color: #6bbf59;
+        }
+        .brand-name { color: #2E7D32; }
+        .brand-name .highlight { color: #66BB6A; }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        nav a {
+            position: relative;
+            text-decoration: none;
+            color: #25362b;
+            font-weight: 600;
+            padding: 7px 27px;
+            transition: color 0.3s;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        nav a i {
+            margin-right: 6px;
+            color: #4CAF50;
+            transition: transform 0.3s;
+        }
+        nav a:hover i { transform: scale(1.2) rotate(-10deg); }
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: 0;
+            height: 2px; width: 0%;
+            background-color: #6bbf59;
+            transition: width 0.3s;
+        }
+        nav a:hover { color: #3a6b4b; }
+        nav a:hover::after { width: 100%; }
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            margin-left: 1rem;
+            color: #3a6b4b;
+            background: none;
+            border: none;
+        }
+
+
+
+        
+        /* .search-bar {
+            margin: 2rem auto;
+            max-width: 600px;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 12px rgba(42, 157, 143, 0.06);
+            padding: 0.5rem 1rem;
+        } */
+
+
+
+        
+        .search-bar input {
+            width: 70%;
+            padding: 0.75rem;
+            border: 2px solid #3a6b4b;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        .search-bar button {
+            padding: 0.75rem 1.5rem;
+            background: #6bbf59;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        .search-bar button:hover { background: #3a6b4b; }
+
+
+
+
+
+         .filter-container {
+                position: relative;
+                display: inline-block;
+        }
+
+        .filter-btn {
+            background: #6bbf59;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;   /* SAME as search button */
+            border-radius: 0.5rem;     /* SAME as search button */
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Poppins', Arial, sans-serif;
+             transition: background 0.3s;
+}
+
+
+        .filter-btn:hover {
+                background-color: #3a6b4b;
+        }
+
+        .filter-dropdown {
+                position: absolute;
+                top: 55px;
+                left: 0;
+                background: white;
+                width: 230px;
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                display: none;
+                z-index: 1000;
+        }
+
+        .filter-dropdown div {
+                padding: 12px 16px;
+                cursor: pointer;
+        }
+
+        .filter-dropdown div:hover {
+                background-color: #f2f2f2;
+        }
+
+
+
+
+
+
+        .search-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    padding: 0.7rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 12px rgba(42, 157, 143, 0.06);
+    max-width: 900px;
+    width: 100%;
+}
+
+.search-bar input {
+    flex: 1;
+}
+
+.filter-container {
+    position: relative;
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+}
+        
+
+
+
+        
+        
+        main {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px rgba(42, 157, 143, 0.08);
+            animation: fadeInUp 1.2s;
+        }
+        h2 {
+            color: #3a6b4b;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            font-family: 'Poppins', Arial, sans-serif;
+            animation: fadeInUp 1s;
+        }
+        .plant-viewer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 1.5rem;
+        }
+        .model-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(42, 157, 143, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s;
+        }
+        .model-container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px rgba(42, 157, 143, 0.12);
+        }
+        model-viewer {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            overflow: hidden;
+        }
+        .info-button {
+            width: 100%;
+            padding: 0.875rem;
+            background: #6bbf59;
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        .info-button:hover {
+            background: #3a6b4b;
+            transform: scale(1.05);
+        }
+        .quiz-section {
+            margin-top: 4rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            box-shadow: 0 20px 25px rgba(42, 157, 143, 0.08);
+            animation: fadeInUp 1s;
+        }
+        .quiz-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3a6b4b;
+        }
+        .quiz-section p {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+        #quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        #quiz-options button {
+            padding: 1rem;
+            border-radius: 1rem;
+            border: none;
+            background: #6bbf59;
+            color: white;
+            font-weight: 600;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        #quiz-options button:hover {
+            background: #3a6b4b;
+            transform: scale(1.05);
+        }
+        #quiz-result {
+            margin-top: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        #plant-info {
+            display:none;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        #Footer {
+            font-family: 'Nunito', sans-serif;
+            background-color: #3a6b4b;
+            color: white;
+            text-align: center;
+            padding: 19px;
+            margin-top: 46px;
+        }
+        #Footer a {
+            color: #FFD700;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        #Footer a:hover { color: #fff176; }
+        #Footer p { margin: 1px 0 0 15px; }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: row;
+                align-items: center;
+                padding: 0.5rem 1rem;
+                height: 60px;
+            }
+            .logo { font-size: 1.4rem; gap: 4px; }
+            .logo i { font-size: 1.4rem; }
+            .menu-toggle { display: block; font-size: 1.6rem; margin-top: -4px; }
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: #fff;
+                box-shadow: 0 8px 24px rgba(42, 157, 143, 0.10);
+                border-radius: 1rem;
+                padding: 0.7rem 2rem;
+                z-index: 1000;
+                min-width: 140px;
+                animation: fadeInUp 0.3s;
+            }
+            nav.show { display: flex; align-items: flex-start; }
+            nav a {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 0.6rem 0;
+                font-size: 1rem;
+                font-family: 'Poppins', Arial, sans-serif;
+                font-weight: 700;
+                color: #3a6b4b;
+                border-bottom: 1px solid #e0f2ee;
+                margin: 0;
+                text-align: left;
+                background: none;
+                box-shadow: none;
+            }
+            nav a:last-child { border-bottom: none; }
+            nav a i { font-size: 1.2rem; color: #4CAF50; min-width: 22px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+ <header>
+
+  <!-- Logo -->
+  <span class="logo">
+    <i class="fas fa-leaf"></i>
+    <span class="brand-name">
+      Herbi<span class="highlight">pedia</span>
+    </span>
+  </span>
+
+  <!-- Mobile Menu Toggle -->
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+
+    <a href="index.html" id="navHome">
+      <i class="fas fa-home"></i> Home
+    </a>
+
+    <a href="ayush.html" id="nav3D" style="display:none;">
+      <i class="fas fa-cube"></i> 3D Plants
+    </a>
+
+    <a href="about.html" id="navAbout" style="display:none;">
+      <i class="fas fa-users"></i> About Us
+    </a>
+
+    <a href="contact.html" id="navContact" style="display:none;">
+      <i class="fas fa-envelope"></i> Contact Us
+    </a>
+
+    <!-- Profile (Visible After Login) -->
+    <a href="profile.html" id="navProfile" style="display:none;">
+      <i class="fas fa-user"></i> Profile
+    </a>
+
+    <!-- Auth Links -->
+    <a href="login.html" id="navLogin">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </a>
+
+    <a href="register.html" id="navRegister">
+      <i class="fas fa-user-plus"></i> Register
+    </a>
+
+    <a href="#" id="navLogout" style="display:none;">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+
+  </nav>
+
+</header>
+
+
+    
+   
+
+
+
+
+    
+
+<div class="search-wrapper">
+      <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search for a plant...">
+          <button onclick="searchPlants()">Search</button>
+
+
+        
+       <div class="filter-container">
+            <button class="filter-btn" id="filterBtn">
+                Filter ▼
+            </button>
+
+            <div class="filter-dropdown">
+                 <div data-value="all">All</div>
+                 <div data-value="culinary">Culinary</div>
+                 <div data-value="skincare">Skincare</div>
+                 <div data-value="haircare">Haircare</div>
+                 <div data-value="cosmetics">Cosmetics</div>
+                 <div data-value="digestion">Digestion</div>
+                 <div data-value="dentalcare">Dental care</div>
+                 <div data-value="immunity">Immunity</div>
+                 <div data-value="respiratory">Respiratory support</div>
+                 <div data-value="bloodsugar">Blood sugar control</div>
+                 <div data-value="perfumes">Perfumes</div>
+                 <div data-value="spiritual">Spiritual rituals</div>
+            </div>
+      </div>
+    </div>
+ </div>
+
+
+
+
+    
+    
+    <main>
+        <h2>Explore the Plants in 3D</h2>
+        <div class="plant-viewer" id="plant-viewer">
+
+            
+            
+
+
+            
+            <!-- Neem Plant -->
+            <div class="model-container" data-category="skincare immunity dentalcare haircare bloodsugar">
+                <model-viewer src="models/neem.glb" alt="Neem Plant" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/neem.html'">Click for Neem Info</button>
+            </div>
+            <!-- Tulsi Plant -->
+            <div class="model-container" data-category="immunity respiratory digestion spiritual">
+                <model-viewer src="models/tulsi.glb" alt="Tulsi Plant" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/tulsi.html'">Click for Tulsi Info</button>
+            </div>
+            <!-- Additional Plants -->
+            <div class="model-container" data-category="bloodsugar immunity">
+                <model-viewer src="models/periwinkle.glb" alt="Peri Winkle" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/periwinkle.html'">Click for Peri Winkle Info</button>
+            </div>
+            <div class="model-container" data-category="digestion immunity respiratory culinary">
+                <model-viewer src="models/ginger_root.glb" alt="Ginger Root" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/ginger.html'">Click for Ginger Root Info</button>
+            </div>
+            <div class="model-container" data-category="immunity bloodsugar">
+                <model-viewer src="models/ashwagandha.glb" alt="Ashwagandha" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/ashwagandha.html'">Click for Ashwagandha Info</button>
+            </div>
+            <div class="model-container" data-category="skincare haircare cosmetics digestion">
+                <model-viewer src="models/aloe_vera.glb" alt="Aloe Vera Plant" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/aloevera.html'">Click for Aloe Vera Info</button>
+            </div>
+            <div class="model-container" data-category="culinary respiratory immunity">
+                <model-viewer src="models/thyme.glb" alt="Thyme" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/thyme.html'">Click for Thyme Info</button>
+            </div>
+            <div class="model-container" data-category="culinary haircare perfumes">
+                <model-viewer src="models/rosemary.glb" alt="Rosemary" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/rosemary.html'">Click for Rosemary Info</button>
+            </div>
+            <div class="model-container" data-category="perfumes cosmetics skincare">
+                <model-viewer src="models/lavender.glb" alt="Lavender" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/lavender.html'">Click for Lavender Info</button>
+            </div>
+            <div class="model-container" data-category="dentalcare digestion immunity culinary">
+                <model-viewer src="models/clove.glb" alt="Clove" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/clove.html'">Click for Clove Info</button>
+            </div>
+            <div class="model-container" data-category="immunity digestion culinary bloodsugar">
+                <model-viewer src="models/garlic.glb" alt="Garlic" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/garlic.html'">Click for Garlic Info</button>
+            </div>
+            <div class="model-container" data-category="skincare spiritual cosmetics">
+                <model-viewer src="models/marigold_plant.glb" alt="Marigold" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/marigold.html'">Click for Marigold Info</button>
+            </div>
+            <div class="model-container" data-category="immunity digestion bloodsugar culinary">
+                <model-viewer src="models/moringa.glb" alt="Moringa" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/moringa.html'">Click for Moringa Info</button>
+            </div>
+            <div class="model-container" data-category="spiritual skincare">
+                <model-viewer src="models/lotus.glb" alt="Lotus" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/lotus.html'">Click for Lotus Info</button>
+            </div>
+            <div class="model-container" data-category="cosmetics perfumes">
+                <model-viewer src="models/orchid.glb" alt="Orchid" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/orchid.html'">Click for Orchid Info</button>
+            </div>
+            <div class="model-container" data-category="digestion culinary perfumes">
+                <model-viewer src="models/lemongrass.glb" alt="Lemon Grass" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/lemongrass.html'">Click for Lemongrass Info</button>
+            </div>
+            <div class="model-container" data-category="skincare cosmetics">
+                <model-viewer src="models/calendula.glb" alt="Calendula" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/calendula.html'">Click for Calendula Info</button>
+            </div>
+
+
+            <div class="model-container" data-category="immunity haircare digestion bloodsugar">
+                <model-viewer src="models/amla.glb" alt="amla" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/amla.html'">Click for Amla Info</button>
+            </div>
+
+            <div class="model-container" data-category="skincare digestion immunity">
+                <model-viewer src="models/chamomile.glb" alt="chamomile" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/chamomile.html'">Click for Chamomile Info</button>
+            </div>
+
+            <div class="model-container" data-category="digestion culinary immunity">
+                <model-viewer src="models/coriander.glb" alt="coriander" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/coriander.html'"
+                >Click for coriander Info</button>
+            </div>
+
+            <div class="model-container" data-category="immunity bloodsugar digestion">
+                <model-viewer src="models/cowpea_leaf.glb" alt="cowpea_leaf" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/cowpea_leaf.html'">Click for cowpea_leaf Info</button>
+            </div>
+
+            <div class="model-container" data-category="skincare">
+                <model-viewer src="models/croton.glb" alt="croton" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/croton.html'">Click for croton_leaf info</button>
+            </div>
+
+            <div class="model-container" data-category="bloodsugar haircare digestion immunity">
+                <model-viewer src="models/fenugreek.glb" alt="fenugreek" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/fenugreek.html'">Click for fenugreek Info</button>
+            </div>
+
+            <div class="model-container" data-category="immunity bloodsugar digestion">
+                <model-viewer src="models/giloy.glb" alt="giloy" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/giloy.html'">Click for giloy Info</button>
+            </div>
+
+            <div class="model-container" data-category="respiratory digestion skincare immunity">
+                <model-viewer src="models/licorice.glb" alt="licorice" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/licorice.html'">Click for licorice Info</button>
+            </div>
+
+            <div class="model-container" data-category="culinary">
+                <model-viewer src="models/maple.glb" alt="maple" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/maple.html'">Click for maple Info</button>
+            </div>
+
+            <div class="model-container" data-category="digestion respiratory skincare culinary">
+                <model-viewer src="models/peppermint.glb" alt="peppermint" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/peppermint.html'">Click for peppermint Info</button>
+            </div>
+
+            <div class="model-container" data-category="spiritual skincare">
+                <model-viewer src="models/plumeria_rubra.glb" alt="plumeria_rubra" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/plumeria_rubra.html'">Click for plumeria_rubra Info</button>
+            </div>
+
+            <div class="model-container" data-category="culinary digestion immunity">
+                <model-viewer src="models/sage.glb" alt="sage" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/sage.html'">Click for sage Info</button>
+            </div>
+
+            <div class="model-container" data-category="immunity skincare bloodsugar digestion">
+                <model-viewer src="models/turmeric.glb" alt="turmeric" auto-rotate camera-controls></model-viewer>
+                <button class="info-button" onclick="window.location.href='Plants/turmeric.html'">Click for turmeric Info</button>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+        <div class="quiz-section">
+            <h2>🌿 Plant Quiz</h2>
+            <p id="quiz-question">Loading question...</p>
+            <div id="quiz-options"></div>
+            <p id="quiz-result"></p>
+        </div>
+        <div id="plant-info">
+            <h3 id="plant-name"></h3>
+            <p><strong>Location:</strong> <span id="plant-location"></span></p>
+            <p><strong>Global Spread:</strong> <span id="plant-spread"></span></p>
+            <p><strong>Preferred Climate:</strong> <span id="plant-climate"></span></p>
+            <p><strong>History:</strong> <span id="plant-history"></span></p>
+            <p><strong>Medical Uses:</strong> <span id="plant-uses"></span></p>
+        </div>
+    </main>
+    <footer id="Footer">
+        <p>&copy; 2026 herbipedia. All rights reserved.</p>
+        <p><a href="contact.html">Contact Us</a></p>
+    </footer>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        // Fade-in effect when page is loaded
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+        // Filter plants dynamically
+        function filterPlants() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const plants = document.querySelectorAll('.model-container');
+            plants.forEach(plant => {
+                const altText = plant.querySelector('model-viewer').getAttribute('alt').toLowerCase();
+                plant.style.display = altText.includes(query) ? 'block' : 'none';
+            });
+        }
+        // Quiz logic
+        const quiz = [
+            {
+                question: "🌱 Which plant is best known for purifying air indoors?",
+                options: ["Tulsi", "Aloe vera", "Rose"],
+                answer: "Aloe vera"
+            },
+            {
+                question: "💊 Which plant is used in Ayurvedic medicine for immunity?",
+                options: ["Ashwagandha", "Marigold", "Rosemary"],
+                answer: "Ashwagandha"
+            },
+            {
+                question: "🌼 Which plant is commonly used for skin burns?",
+                options: ["Ginger", "Aloe vera", "Neem"],
+                answer: "Aloe vera"
+            },
+            {
+                question: "🌿 Which plant is considered sacred in India and used for boosting immunity?",
+                options: ["Tulsi", "Lotus", "Orchid"],
+                answer: "Tulsi"
+            },
+            {
+                question: "🍃 Which plant is widely used for dental care and skin problems?",
+                options: ["Neem", "Marigold", "Lavender"],
+                answer: "Neem"
+            },
+            {
+                question: "🧄 Which plant is known for its antibacterial and heart-health benefits?",
+                options: ["Garlic", "Ginger", "Clove"],
+                answer: "Garlic"
+            },
+            {
+                question: "🫚 Which plant is commonly used to treat nausea and improve digestion?",
+                options: ["Ginger", "Lemongrass", "Calendula"],
+                answer: "Ginger"
+            },
+            {
+                question: "🌼 Which flower is commonly used in wound healing and skin ointments?",
+                options: ["Calendula", "Rose", "Orchid"],
+                answer: "Calendula"
+            },
+            {
+                question: "🌾 Which plant is known as a nutritional powerhouse rich in vitamins?",
+                options: ["Moringa", "Neem", "Lotus"],
+                answer: "Moringa"
+            },
+            {
+                question: "🌸 Which plant is mainly used for relaxation and stress relief through aroma?",
+                options: ["Lavender", "Tulsi", "Clove"],
+                answer: "Lavender"
+            },
+            {
+                question: "🍋 Which plant is commonly used in herbal tea for digestion and detox?",
+                options: ["Lemongrass", "Ginger", "Marigold"],
+                answer: "Lemongrass"
+            },
+            {
+                question: "🌺 Which flower grows in water and symbolizes purity in India?",
+                options: ["Lotus", "Marigold", "Periwinkle"],
+                answer: "Lotus"
+            },
+            {
+                question: "🌼 Which flower is widely used in festivals and has anti-inflammatory properties?",
+                options: ["Marigold", "Orchid", "Lavender"],
+                answer: "Marigold"
+            },
+            {
+                question: "🌱 Which plant is traditionally used to help control diabetes?",
+                options: ["Periwinkle", "Aloe vera", "Tulsi"],
+                answer: "Periwinkle"
+            },
+            {
+                question: "🌸 Which plant is mainly grown for decorative and ornamental purposes?",
+                options: ["Orchid", "Neem", "Garlic"],
+                answer: "Orchid"
+            },
+            {
+                question: "🌿 Which spice plant is commonly used for toothache relief?",
+                options: ["Clove", "Ginger", "Lavender"],
+                answer: "Clove"
+            },
+            {
+                question: "🌿 Which plant is known for its anti-inflammatory and joint pain relief properties?",
+                options: ["Turmeric", "Periwinkle", "Orchid"],
+                answer: "Turmeric"
+            },
+            {
+                question: "🌿 Which medicinal plant is used to improve digestion and reduce bloating?",
+                options: ["Fennel", "Lavender", "Neem"],
+                answer: "Fennel"
+            },
+            {
+                question: "🌿 Which plant is traditionally used for treating respiratory problems like asthma?",
+                options: ["Vasaka", "Rose", "Marigold"],
+                answer: "Vasaka"
+            },
+            {
+                question: "🌿 Which medicinal plant is known for boosting hemoglobin levels?",
+                options: ["Beetroot", "Ginger", "Clove"],
+                answer: "Beetroot"
+            },
+
+        ];
+        let currentQuiz = 0;
+        function loadQuiz() {
+            const q = quiz[currentQuiz];
+            document.getElementById("quiz-question").textContent = q.question;
+            const optionsDiv = document.getElementById("quiz-options");
+            optionsDiv.innerHTML = "";
+            q.options.forEach(option => {
+                const btn = document.createElement("button");
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(option);
+                optionsDiv.appendChild(btn);
+            });
+            document.getElementById("quiz-result").textContent = "";
+        }
+        function checkAnswer(selected) {
+            const correct = quiz[currentQuiz].answer;
+            const result = document.getElementById("quiz-result");
+            if (selected === correct) {
+                result.textContent = "✅ Correct!";
+                result.style.color = "green";
+            } else {
+                result.textContent = "❌ Incorrect. Correct answer is: " + correct;
+                result.style.color = "crimson";
+            }
+            setTimeout(() => {
+                currentQuiz = (currentQuiz + 1) % quiz.length;
+                loadQuiz();
+            }, 2500);
+        }
+        window.addEventListener("DOMContentLoaded", () => {
+            loadQuiz();
+        });
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('navbar').classList.toggle('show');
+        });
+        // Close menu when a nav link is clicked (mobile)
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.getElementById('navbar').classList.remove('show');
+            });
+        });
+        // Animate logo on page load
+        gsap.to('.logo', {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "back.out(1.7)",
+            delay: 0.2
+        });
+        // Change header shadow on scroll
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            header.style.boxShadow = window.scrollY > 10
+                ? '0 4px 16px rgba(76,175,80,0.10)'
+                : '0 2px 6px rgba(0,0,0,0.05)';
+        });
+
+
+
+        
+
+//         // ================= FILTER DROPDOWN LOGIC =================
+// const filterBtn = document.getElementById("filterBtn");
+// const filterDropdown = document.getElementById("filterDropdown");
+
+// // Toggle dropdown on button click
+// filterBtn.addEventListener("click", function (e) {
+//     e.stopPropagation();
+//     filterDropdown.style.display =
+//         filterDropdown.style.display === "block" ? "none" : "block";
+// });
+
+// // Handle filter option click
+// document.querySelectorAll(".filter-dropdown div").forEach(item => {
+//     item.addEventListener("click", function () {
+//         const value = this.getAttribute("data-value");
+//         filterBtn.innerHTML = this.innerText + " ▼";
+//         filterDropdown.style.display = "none";
+//         filterPlants(value); // optional filtering hook
+//     });
+// });
+
+// // Close dropdown when clicking outside
+// document.addEventListener("click", function () {
+//     filterDropdown.style.display = "none";
+// });
+        
+//     </script>
+    <script src="//code.tidio.co/jkz58qnv5cjqlyh3azdphziunrt9qhu.js" async></script>
+
+
+
+
+
+<script>     
+    
+document.addEventListener("DOMContentLoaded", function () {
+
+    const filterBtn = document.getElementById("filterBtn");
+    const dropdown = document.querySelector(".filter-dropdown");
+    const options = document.querySelectorAll(".filter-dropdown div");
+
+    filterBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+    });
+
+    options.forEach(option => {
+        option.addEventListener("click", function () {
+            const selectedCategory = this.getAttribute("data-value");
+            filterBtn.innerHTML = this.innerText + " ▼";
+            filterPlants(selectedCategory);
+            dropdown.style.display = "none";
+        });
+    });
+
+    document.addEventListener("click", function () {
+        dropdown.style.display = "none";
+    });
+});
+
+// function filterPlants(selectedCategory = "all") {
+//     const plants = document.querySelectorAll(".model-container");
+
+//     plants.forEach(function (plant) {
+//         const category = plant.getAttribute("data-category") || "";
+
+//         if (
+//             selectedCategory === "all" ||
+//             category.toLowerCase().split(" ").includes(selectedCategory)
+//         ) {
+//             plant.style.display = "";
+//         } else {
+//             plant.style.display = "none";
+//         }
+//     });
+// }
+
+
+
+
+    function filterPlants(selectedCategory = "all") {
+
+    const plants = document.querySelectorAll(".model-container");
+
+    plants.forEach(function (plant) {
+
+        const category = plant.getAttribute("data-category") || "";
+        const categoriesArray = category.toLowerCase().trim().split(/\s+/);
+
+        if (selectedCategory === "all") {
+            plant.style.display = "";
+        }
+        else if (categoriesArray.includes(selectedCategory.trim().toLowerCase())) {
+            plant.style.display = "";
+        }
+        else {
+            plant.style.display = "none";
+        }
+
+    });
+}
+
+
+
+
+
+
+// new for search buttun
+function searchPlants() {
+
+    const query = document
+        .getElementById("search-input")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const plants = document.querySelectorAll(".model-container");
+
+    plants.forEach(function(plant) {
+
+        const name = plant
+            .querySelector("model-viewer")
+            .getAttribute("alt")
+            .toLowerCase();
+
+        if (name.includes(query)) {
+            plant.style.display = "block";
+        } else {
+            plant.style.display = "none";
+        }
+
+    });
+}
+
+
+
+    
+
+</script>
+   <script type="module" src="js/auth-guard.js"></script>
+
+
+
+
+
+
+
+    
+</body>
+</html>

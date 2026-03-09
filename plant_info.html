@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herbipedia - Plant Info</title>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- 3D Model Viewer -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <style>
+/* ===== Reset & Fonts ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== Navbar ===== */
+#navbar {
+  display: flex;
+  gap: 20px;
+  padding: 15px 40px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#navbar a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #2E7D32;
+}
+
+#navbar a:hover {
+  color: #1B5E20;
+}
+
+/* ===== Body Theme ===== */
+body {
+  background: linear-gradient(130deg, #d1f2eb, #a9dfbf);
+  color: #145a32;
+  min-height: 100vh;
+  padding: 40px;
+  transition: background 0.5s ease;
+}
+
+body.dark-mode {
+  background: linear-gradient(130deg, #1b1b1b, #2e2e2e);
+  color: #d0f0c0;
+}
+
+/* ===== Layout ===== */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* ===== Plant Info ===== */
+#plant-info {
+  max-width: 500px;
+}
+
+#plant-info h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+#plant-info p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+/* ===== Model Viewer ===== */
+model-viewer {
+  width: 350px;
+  height: 350px;
+  border-radius: 15px;
+  background-color: #eafaf1;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* ===== Toggle Button ===== */
+.toggle-theme {
+  position: fixed;
+  top: 80px;
+  right: 25px;
+  padding: 10px 18px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+}
+    </style>
+</head>
+
+<body>
+
+<!-- ✅ Standardized Navbar -->
+<nav id="navbar">
+  <a href="index.html" id="navHome"><i class="fas fa-home"></i> Home</a>
+  <a href="ayush.html" id="nav3D"><i class="fas fa-cube"></i> 3D Plants</a>
+  <a href="about.html" id="navAbout"><i class="fas fa-users"></i> About Us</a>
+  <a href="contact.html" id="navContact"><i class="fas fa-envelope"></i> Contact Us</a>
+  <a href="login.html" id="navLogin"><i class="fas fa-sign-in-alt"></i> Login</a>
+  <a href="register.html" id="navRegister"><i class="fas fa-user-plus"></i> Register</a>
+  <a href="#" id="navLogout" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</nav>
+
+<!-- Toggle Button -->
+<button class="toggle-theme" onclick="toggleTheme()">Change Theme</button>
+
+<!-- Main Content -->
+<div class="container">
+
+    <model-viewer id="plant-model" alt="Plant Model"
+        auto-rotate camera-controls>
+    </model-viewer>
+
+    <div id="plant-info">
+        <h3 id="plant-name"></h3>
+        <p><strong>Location:</strong> <span id="plant-location"></span></p>
+        <p><strong>Global Spread:</strong> <span id="plant-spread"></span></p>
+        <p><strong>Preferred Climate:</strong> <span id="plant-climate"></span></p>
+        <p><strong>History:</strong> <span id="plant-history"></span></p>
+        <p><strong>Medical Uses:</strong> <span id="plant-uses"></span></p>
+    </div>
+
+</div>
+
+<script>
+const modelMap = {
+    "Neem": "models/neem.glb",
+    "Tulsi": "models/tulsi.glb",
+    "Aloe Vera": "models/aloe_vera_plant.glb",
+    "Rose": "models/rose_flower.glb",
+    "Ginger": "models/ginger_root.glb",
+    "Ashwagandha": "models/aswagandha.glb",
+    "Thyme": "models/thyme.glb",
+    "Rosemary": "models/rosemary.glb",
+    "Lavender": "models/lavender.glb",
+    "Clove": "models/clove.glb",
+    "Garlic": "models/garlic.glb",
+    "Marigold": "models/marigold_plant.glb",
+    "Moringa": "models/moringa.glb",
+    "Lotus": "models/lotus.glb",
+    "Orchid": "models/orchid.glb",
+    "Hibiscus": "models/habiscus.glb",
+    "Calendula": "models/orange.glb",
+    "Amla":"models/amla.glb",
+    "cowpea_leaf":"models/cowpea_leaf.glb",
+    "croton":"models/croton.glb",
+
+    
+};
+
+function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    const plantInfo = JSON.parse(localStorage.getItem("plantInfo"));
+
+    if (plantInfo) {
+        document.getElementById("plant-name").textContent = plantInfo.name;
+        document.getElementById("plant-location").textContent = plantInfo.location;
+        document.getElementById("plant-spread").textContent = plantInfo.global_spread;
+        document.getElementById("plant-climate").textContent = plantInfo.preferred_climate;
+        document.getElementById("plant-history").textContent = plantInfo.history;
+        document.getElementById("plant-uses").textContent = plantInfo.medical_uses;
+
+        const modelViewer = document.getElementById("plant-model");
+        if (modelMap[plantInfo.name]) {
+            modelViewer.src = modelMap[plantInfo.name];
+        } else {
+            modelViewer.style.display = "none";
+        }
+    }
+});
+</script>
+
+<!-- Auth Guard -->
+<script type="module" src="js/auth-guard.js"></script>
+
+</body>
+</html>

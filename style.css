@@ -1,0 +1,314 @@
+/* ================= GLOBAL RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    color: #1b5e20;
+    margin-bottom: 100px;
+    scroll-behavior: smooth;
+}
+
+
+/* ================= HEADER ================= */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+h1, h2 {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+h2 {
+    color: #4CAF50;
+}
+
+/* ================= SECTIONS ================= */
+section {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+#about, #contact {
+    background-color: #222;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 900px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ================= FORMS ================= */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+input, textarea, select {
+    input, textarea, select {
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #1b5e20;
+    transition: 0.3s ease;
+}
+
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #1abc9c;
+    box-shadow: 0 0 5px #1abc9c;
+}
+
+button[type="submit"] {
+    padding: 0.75rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: 600;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .plant-viewer {
+        flex-direction: column;
+    }
+
+    model-viewer {
+        width: 100%;
+    }
+}
+
+
+
+
+
+/* ================= AUTH PAGE BACKGROUND ================= */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+
+    background: url("https://raw.githubusercontent.com/revatigade08/Herbipedia/main/images/kifoku-waterfall-21666_512.gif") no-repeat center center;
+    background-size: cover;
+}
+
+.auth-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+/* ================= AUTH CONTAINER ================= */
+
+.auth-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.auth-container h2 {
+    margin-bottom: 25px;
+    color: #4CAF50;
+    font-size: 24px;
+}
+
+/* Password Wrapper */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px;
+}
+
+/* Eye Icon */
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #4CAF50;
+}
+
+/* Auth Links */
+.auth-container p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.auth-container a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-container a:hover {
+    color: #1abc9c;
+}
+
+
+
+
+
+.plant-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.icon-btn {
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.icon-btn:hover {
+    background: #2e7d32;
+    color: white;
+}
+
+
+
+
+#bookmarkList {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.bookmark-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.bookmark-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.bookmark-link {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2e7d32;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.bookmark-link:hover {
+    text-decoration: underline;
+    color: #1b5e20;
+}
+
+.delete-btn {
+    background: #ffebee;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #c62828;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.delete-btn:hover {
+    background: #ffcdd2;
+    transform: scale(1.1);
+}
+
+
+
+
+#profile {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.profile-card{
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}

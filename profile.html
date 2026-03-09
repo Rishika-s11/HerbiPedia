@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile - Herbipedia</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- Correct CSS Paths -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <script src="js/profile-bookmarks.js"></script>
+
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="main-header">
+
+  <div class="logo">
+    <i class="fas fa-leaf"></i>
+    <span class="brand-name">
+      Herbi<span class="highlight">pedia</span>
+    </span>
+  </div>
+
+  <nav class="main-nav">
+    <a href="index.html">
+      <i class="fas fa-home"></i> Home
+    </a>
+
+<a href="#" id="navLogout">
+    <i class="fas fa-sign-out-alt"></i> Logout
+</a>
+
+</nav>
+</header>
+
+
+<!-- ===== PROFILE SECTION ===== -->
+<section id="profile">
+
+  <h2>My Profile 🌿</h2>
+
+  <div class="profile-card">
+
+    <div class="profile-row">
+      <span class="label">Name</span>
+      <span id="profileName"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="label">Username</span>
+      <span id="profileUsername"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="label">Email</span>
+      <span id="profileEmail"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="label">Contact</span>
+      <span id="profileContact"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="label">Gender</span>
+      <span id="profileGender"></span>
+    </div>
+
+    <div class="profile-row">
+      <span class="label">DOB</span>
+      <span id="profileDob"></span>
+    </div>
+
+    <h2>My Bookmarked Plants</h2>
+<div id="bookmarkList"></div>
+
+
+  </div>
+
+</section>
+
+<!-- ===== FIREBASE PROFILE SCRIPT ===== -->
+<script type="module">
+
+import { auth, db } from "./js/firebase-config.js";
+import { onAuthStateChanged }
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { doc, getDoc }
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user) => {
+
+  if (!user) {
+    window.location.replace("index.html");
+    return;
+  }
+
+  try {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+
+      document.getElementById("profileName").textContent = data.name || "";
+      document.getElementById("profileUsername").textContent = data.username || "";
+      document.getElementById("profileEmail").textContent = data.email || "";
+      document.getElementById("profileContact").textContent = data.contact || "";
+      document.getElementById("profileGender").textContent = data.gender || "";
+      document.getElementById("profileDob").textContent = data.dob || "";
+    }
+
+  } catch (error) {
+    console.error("Profile Load Error:", error);
+  }
+
+});
+</script>
+<script type="module">
+import { auth } from "./js/firebase-config.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+const logoutBtn = document.getElementById("navLogout");
+
+logoutBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    try {
+        await signOut(auth);
+        window.location.href = "index.html";
+    } catch (error) {
+        console.error("Logout Error:", error);
+        alert("Logout failed. Try again.");
+    }
+});
+</script>
+<!-- Global Auth Controller -->
+<script type="module" src="js/auth.js"></script>
+
+</body>
+</html>
