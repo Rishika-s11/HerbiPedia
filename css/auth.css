@@ -1,1 +1,197 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+/* ===== HIDE NAVBAR ON LOGIN & REGISTER ===== */
+.auth-page #navbar {
+  display: none !important;
+}
+
+/* ===== FULL SCREEN BACKGROUND ===== */
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+
+  background: url("https://raw.githubusercontent.com/revatigade08/Herbipedia/main/images/kifoku-waterfall-21666_512.gif")
+              no-repeat center center fixed;
+  background-size: cover;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== DARK OVERLAY ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: -1;
+}
+
+/* ===== FORM CONTAINER ===== */
+.auth-container {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  padding: 45px 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.7s ease;
+}
+
+/* ===== HEADING ===== */
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1a1a1a;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ===== INPUTS & SELECT ===== */
+.auth-container input,
+.auth-container select {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  margin-bottom: 18px;
+
+  border-radius: 12px;
+  border: 1px solid #ccc;
+
+  background: #ffffff;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Segoe UI", Arial, sans-serif;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  transition: all 0.3s ease;
+}
+
+/* Custom dropdown arrow */
+.auth-container select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%231a1a1a' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 18px;
+  padding-right: 40px;
+}
+
+/* Focus state */
+.auth-container input:focus,
+.auth-container select:focus {
+  outline: none;
+  border-color: #2bb673;
+  box-shadow: 0 0 10px rgba(43, 182, 115, 0.5);
+}
+
+/* Dropdown options */
+.auth-container select option {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Fix date input visibility */
+.auth-container input[type="date"] {
+  color: #1a1a1a;
+}
+
+/* ===== PASSWORD WRAPPER ===== */
+.password-wrapper {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #1a1a1a;
+  font-size: 16px;
+}
+
+/* ===== BUTTON ===== */
+.auth-container button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #2bb673, #1e8e5a);
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  box-shadow: 0 10px 25px rgba(43, 182, 115, 0.6);
+}
+
+.auth-container button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(43, 182, 115, 0.7);
+}
+
+.auth-container button:active {
+  transform: scale(0.98);
+}
+
+/* ===== LINKS ===== */
+.auth-container p {
+  text-align: center;
+  margin-top: 18px;
+  color: #333;
+  font-weight: 500;
+}
+
+.auth-container a {
+  color: #1e8e5a;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* Remove default purple visited color */
+.auth-container a:visited {
+  color: #1e8e5a;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 35px 25px;
+  }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

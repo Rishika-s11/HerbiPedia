@@ -1,0 +1,123 @@
+/* ================= HEADER ================= */
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    background: linear-gradient(to right, #e8f5e9, #c8e6c9);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+.logo i {
+    font-size: 22px;
+}
+
+.highlight {
+    color: #4CAF50;
+}
+
+/* Navbar */
+.main-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #2e7d32;
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: #1b5e20;
+    transform: translateY(-2px);
+}
+
+
+/* ================= PROFILE SECTION ================= */
+
+#profile {
+    margin-top: 80px;
+    text-align: center;
+}
+
+#profile h2 {
+    font-size: 26px;
+    margin-bottom: 35px;
+    color: #2e7d32;
+}
+
+/* Profile Card */
+.profile-card {
+    width: 550px;               /* reduced width */
+    margin: 0 auto;
+    padding: 40px 50px;
+    background: #f1f8f4;        /* theme aligned light green */
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* Profile Row */
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    font-size: 15px;
+}
+
+.profile-row:last-child {
+    border-bottom: none;
+}
+
+/* Label Styling */
+.profile-row .label {
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+/* Value Styling */
+.profile-row span:last-child {
+    color: #333;
+    font-weight: 500;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .main-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .profile-card {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .profile-row {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+    }
+}
