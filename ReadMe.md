@@ -7,7 +7,7 @@
 
 ## 🚀 How to Use
 
-Follow these steps to explore the Virtual Garden project:
+Follow these steps to explore the HerbiPedia project:
 
 1. **Visit the Website**  
    Access the live site hosted via GitHub Pages:  
@@ -17,6 +17,7 @@ Follow these steps to explore the Virtual Garden project:
    - Browse through the homepage to view featured plants.
    - Click on plant cards to get more detailed information.
    - Interact with 3D plant models.
+   - Ask your queries to HerbiBuddy - Chatbot
 
 3. **Navigation**  
    - Use the navigation bar to access pages like About, Contact, and specific plant info pages.
@@ -43,34 +44,9 @@ Follow these steps to explore the Virtual Garden project:
 
 ## 🛠️ Tech Stack
 - **Frontend**: HTML, CSS, JavaScript
+- **Backend**: FireBase
 - **3D Models**: Integrated from Google Poly/Sketchfab
-- **Hosting**: GitHub Pages / Netlify (as applicable)
-
----
-
-## 👨‍👩‍👧‍👦 Team Members
-
-
-
----
-
-## 📸 Screenshots
-Home Page :
-
-![Home Page](https://github.com/user-attachments/assets/bb9a537d-c161-43c4-a671-d9bead4263a7)
-
-Models :
-
-![Models](https://github.com/user-attachments/assets/d4579e83-dc60-405e-a8fe-8e2673e04cde)
-
-Neem Info Page : 
-
-![Neem Info Page](https://github.com/user-attachments/assets/0790b1de-197c-4236-8935-0910e1d63441)
-
-About Us :
-
-![About Us](https://github.com/user-attachments/assets/a9af564f-c898-41f3-96fd-ec6b98c7e8b7)
-
+- **Hosting**: GitHub Pages
 
 ---
 
