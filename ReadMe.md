@@ -1,6 +1,6 @@
 # Herbipedia 🌱
 
-**Herbipedia** is a dynamic website that offers detailed information about a variety of plants, allowing users to explore and interact with them in a virtual space. Users can move, zoom in, and examine plants closely to better understand their characteristics. The platform serves as an engaging educational tool, helping users gain valuable knowledge about plant species and their care through an immersive digital experience.
+**HerbiPedia** is a platform that delivers Ayurvedic knowledge through modern technology. It lets users explore medicinal plants using 3D models that show plant structure and traditional uses. Users can filter plants by categories like digestion, skin care, and culinary uses. A chatbot, HerbiBuddy, guides users and explains website features. 🌿
 
 
 ---
