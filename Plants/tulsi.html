@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amla Plant Details</title>
+  <meta charset="UTF-8">
+  <title>Tulsi Plant Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background-color: #f9fafb;
-      color: #333;
-      cursor: url("http://www.rw-designer.com/cursor-extern.php?id=51983") 16 16, auto;
+      background-color: #f3f4f6;   /* light grey background */
+      color: #374151;              /* dark grey text */
     }
 
+    /* Header */
     header {
-      background-color: #fff;
+      background-color: #ffffff;
       border-bottom: 1px solid #e5e7eb;
       padding: 20px;
       text-align: center;
@@ -24,29 +24,34 @@
     header h1 {
       font-size: 2em;
       margin: 0;
-      color: #2d572c;
+      color: #2d572c;   /* dark green heading */
     }
 
+    /* Main Container */
     .container {
       max-width: 1200px;
       margin: 40px auto;
       padding: 0 20px;
       display: flex;
       gap: 40px;
+      flex-wrap: wrap;
     }
 
     .left-column {
       flex: 1.5;
+      min-width: 300px;
     }
 
     .right-column {
       flex: 1;
-      background-color: #fff;
+      background-color: #ffffff;
       border: 1px solid #d1d5db;
       padding: 20px;
       border-radius: 10px;
+      min-width: 250px;
     }
 
+    /* Image */
     .plant-image {
       width: 100%;
       border-radius: 10px;
@@ -54,34 +59,30 @@
       margin-bottom: 20px;
     }
 
+    /* Description */
     .description {
       font-size: 1rem;
       line-height: 1.6;
       margin-bottom: 30px;
     }
 
-    .info-box {
-      margin-bottom: 15px;
-    }
-
-    .info-box strong {
-      color: #2d572c;
-    }
-
+    /* Section Title */
     .section-title {
       font-size: 1.5rem;
       margin: 40px 0 20px;
       color: #437c41;
     }
 
+    /* Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
     }
 
+    /* Cards */
     .card {
-      background-color: white;
+      background-color: #ffffff;
       padding: 15px;
       border-left: 6px solid #76b947;
       border-radius: 10px;
@@ -92,83 +93,100 @@
       margin-top: 0;
       color: #437c41;
     }
+
+    /* Garden Info */
+    .right-column h2 {
+      color: #2d572c;
+      margin-top: 0;
+    }
+
+    .info-box {
+      margin-bottom: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
   </style>
 </head>
 
 <body>
+
   <header>
-    <h1>Amla (Phyllanthus emblica)</h1>
+    <h1>Tulsi (Ocimum sanctum)</h1>
   </header>
 
   <div class="container">
+
+    <!-- Left Side -->
     <div class="left-column">
-      <img src="amla.jpg" alt="Amla Tree" class="plant-image">
+      <img src="tulsi.jpg" alt="Tulsi Plant" class="plant-image">
 
       <div class="description">
-        Amla, also known as Indian Gooseberry, is a deciduous tree famous for its nutrient-dense fruit.
-        Regarded as a "superfood" in Ayurveda, it is one of the richest natural sources of Vitamin C.
-        The tree has light green, feathery leaves and produces small, greenish-yellow globular fruits.
-        Virtually every part of the tree, especially the fruit, is used in various health tonics.
+        Tulsi, also known as Holy Basil, is a sacred plant in Ayurveda known for its medicinal and spiritual significance. 
+        It is widely used in traditional Indian medicine and is considered a symbol of purity and protection.
       </div>
 
       <div class="section-title">Plant Attributes & Uses</div>
 
       <div class="grid">
+
         <div class="card">
           <h3>Scientific Classification</h3>
           <p>
-            <strong>Family:</strong> Phyllanthaceae<br>
-            <strong>Genus:</strong> Phyllanthus<br>
-            <strong>Species:</strong> P. emblica
+            <strong>Family:</strong> Lamiaceae <br>
+            <strong>Genus:</strong> Ocimum <br>
+            <strong>Species:</strong> O. sanctum
           </p>
         </div>
 
         <div class="card">
           <h3>Global Spread</h3>
           <p>
-            Native to tropical Southeast Asia, particularly common throughout the Indian subcontinent and Southern China.
+            Native to India, also found in Southeast Asia, and grown worldwide.
           </p>
         </div>
 
         <div class="card">
           <h3>Preferred Climate</h3>
           <p>
-            Thrives in subtropical to tropical regions; it is hardy and can tolerate both dry spells and light frost.
+            Tropical and subtropical climates, thrives in well-drained soil.
           </p>
         </div>
 
         <div class="card">
           <h3>Medicinal Uses</h3>
           <p>
-            Promotes hair growth, enhances eyesight, regulates blood sugar, and supports healthy glowing skin.
+            Boosts immunity, reduces stress, supports respiratory health, and acts as an adaptogen.
           </p>
         </div>
 
         <div class="card">
           <h3>Traditional Uses</h3>
           <p>
-            A key ingredient in Triphala and Chyawanprash for treating indigestion, jaundice, and cough.
+            Used in Ayurveda for purification, respiratory support, and spiritual rituals.
           </p>
         </div>
 
         <div class="card">
-          <h3>Health Benefits</h3>
+          <h3>Ayurvedic Benefits</h3>
           <p>
-            Provides powerful anti-aging properties, boosts immunity, and acts as a potent natural blood purifier.
+            Balances Kapha and Vata, promotes mental clarity, enhances digestion.
           </p>
         </div>
+
       </div>
     </div>
 
+    <!-- Right Side -->
     <div class="right-column">
-      <h2 style="color: #2d572c;">Garden Information</h2>
+      <h2>Garden Information</h2>
 
-      <div class="info-box"><strong>Hardiness:</strong> Zones 10–12</div>
+      <div class="info-box"><strong>Hardiness:</strong> Zones 10–11</div>
       <div class="info-box"><strong>Climate Zones:</strong> Tropical, Subtropical</div>
       <div class="info-box"><strong>Exposure:</strong> Full Sun</div>
-      <div class="info-box"><strong>Soil Type:</strong> Well-drained, light to medium loam</div>
-      <div class="info-box"><strong>Water Needs:</strong> Moderate (regular while young)</div>
+      <div class="info-box"><strong>Soil Type:</strong> Well-drained, fertile soil</div>
+      <div class="info-box"><strong>Water Needs:</strong> Moderate</div>
     </div>
+
   </div>
 
 </body>
